@@ -24,6 +24,9 @@ profile.cov
 go.work
 go.work.sum
 
+#DS_Store
+.DS_Store
+
 # env file
 .env
 
