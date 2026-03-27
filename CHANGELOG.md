@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.0.1] - 2026-03-27
+
+### Changed
+
+- Refactored monolithic `fcm.go` into a modular project structure.
+- Organized code into specialized internal packages: `auth`, `config`, `fcm`, `log`, `model`, and `util`.
+- Moved CLI entry point to `cmd/fcm/main.go`.
+- Improved maintainability and internal code organization.
+
 ## [v1.0.0] - 2026-03-27
 
 ### Added
