@@ -416,6 +416,18 @@ fcm -t TOKEN -n '{"title":"Hi","body":"Hello"}'
 
 ---
 
+## Specify Key File Directly
+
+If you don't want to use environment variables, you can pass the key file using `-k` or `--key`:
+
+```bash
+fcm -k service-account.json \
+  -t TOKEN \
+  -n '{"title":"Test","body":"Using manual key file"}'
+```
+
+---
+
 ## Send to Multiple Tokens
 
 ```bash
