@@ -404,6 +404,14 @@ fcm init [options]
 | `-v`, `--version`      | Version                             |
 | `-h`, `--help`         | Help                                |
 
+### Init Flags (`fcm init`)
+
+| Flag                   | Description                         |
+| ---------------------- | ----------------------------------- |
+| `-f`, `--file`         | Output config file path             |
+| `--force`              | Overwrite existing file             |
+| `--json`               | JSON output for automation          |
+
 ---
 
 # 📱 Examples

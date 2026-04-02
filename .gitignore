@@ -36,3 +36,5 @@ go.work.sum
 
 # Build artifacts
 dist/
+*firebase-adminsdk*.json
+*.yaml

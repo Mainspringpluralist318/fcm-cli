@@ -62,6 +62,13 @@ func SendWithRetry(ctx context.Context, url, accessToken string, msg model.FCMMe
 		}
 
 		err = fmt.Errorf("FCM error %d: %s", resp.StatusCode, string(respBody))
+		
+		// Do not retry on client errors, except 429 Too Many Requests
+		if resp.StatusCode >= 400 && resp.StatusCode < 500 && resp.StatusCode != http.StatusTooManyRequests {
+			// Print error only once instead of logging it on every retry loop
+			return "", lastCode, err
+		}
+
 		log.Log(model.ERROR, "%v", err)
 
 		if i < retries {

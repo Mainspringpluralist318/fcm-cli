@@ -21,15 +21,21 @@ func runInit(args []string) {
 	fileShort := initFlags.String("f", "fcm.yaml", "")
 	fileLong := initFlags.String("file", "", "")
 	force := initFlags.Bool("force", false, "")
+	jsonFlag := initFlags.Bool("json", false, "")
 
 	initFlags.Usage = func() {
 		fmt.Println("Usage: fcm init [options]")
 		fmt.Println("Options:")
 		fmt.Println("  -f, --file <file>   Output config file path (default: fcm.yaml)")
 		fmt.Println("  --force             Overwrite existing file")
+		fmt.Println("  --json              JSON output for automation")
 	}
 
 	_ = initFlags.Parse(args)
+
+	if *jsonFlag {
+		log.OutputJSON = true
+	}
 
 	path := util.FirstNonEmpty(*fileLong, *fileShort)
 	if path == "" {
@@ -365,6 +371,8 @@ func main() {
 
 	if log.OutputJSON {
 		log.PrintJSON(finalResult)
+	} else if !finalResult.Success && finalResult.Error != "" {
+		log.Log(model.ERROR, "%s", finalResult.Error)
 	}
 
 	if !finalResult.Success {

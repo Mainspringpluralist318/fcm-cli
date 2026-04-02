@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [v1.2.0] - 2026-04-02
+
+### Added
+
+- Added support for the `--json` flag to the `fcm init` command to allow structured outputs in automation pipelines.
+- Added `*firebase-adminsdk*.json` and `*.yaml` to `.gitignore` to prevent accidental leaks of service accounts and config files.
+
+### Changed
+
+- Reorganized `README.md` to explicitly list `fcm init` flags (`--file`, `--force`, `--json`) in their own structured table for better visibility.
+
+### Fixed
+
+- Stopped futile retries on HTTP 4xx client errors (e.g., `400 Bad Request`, `404 Not Found`), except for `429 Too Many Requests`. The CLI now immediately exits when a token is invalid instead of spamming duplicate failed requests.
+- Fixed a silent failure issue where final errors (for single-send operations) were swallowed and not printed to the console when `--json` mode was disabled.
+
 ## [v1.1.2] - 2026-04-01
 
 ### Added
